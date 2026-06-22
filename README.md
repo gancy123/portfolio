@@ -1,21 +1,35 @@
-# React + TypeScript + Vite + shadcn/ui
+# Chun Yang — Portfolio
 
-This is a template for a new Vite project with React, TypeScript, and shadcn/ui.
+A personal portfolio built to show practical web-development skills through
+working interfaces, small experiments, and thoughtful interaction.
 
-## Adding components
+[View the live website](https://chun-yang-portfolio.vercel.app/)
 
-To add components to your app, run the following command:
+## Highlights
+
+- Responsive portfolio interface with an accessible floating navigation
+- Interactive Mini Lab with four working front-end experiments
+- Animated technology conveyor with reduced-motion support
+- Orbiting education and experience timeline
+- Project case studies with live demos and direct source links
+
+## Built with
+
+React, TypeScript, Tailwind CSS, Framer Motion, GSAP, shadcn/ui, and Vite.
+
+## Run locally
 
 ```bash
-npx shadcn@latest add button
+npm install
+npm run dev
 ```
 
-This will place the ui components in the `src/components` directory.
+Then open the local URL shown in the terminal.
 
-## Using components
+## Checks
 
-To use the components in your app, import them as follows:
-
-```tsx
-import { Button } from "@/components/ui/button"
+```bash
+npm run typecheck
+npm run lint
+npm run build
 ```
