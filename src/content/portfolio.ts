@@ -1,7 +1,9 @@
 export type Capability = {
+  number: string
   title: string
   description: string
-  detail: string
+  tools: string[]
+  visual: "frontend" | "software" | "support"
 }
 
 export type JourneyItem = {
@@ -14,20 +16,28 @@ export type JourneyItem = {
 
 export const capabilities: Capability[] = [
   {
-    title: "Responsive websites",
-    description: "Pages that feel natural on phones, tablets and desktops.",
-    detail: "HTML + CSS",
-  },
-  {
-    title: "Interactive web features",
+    number: "01",
+    title: "Front-end development",
     description:
-      "Navigation, forms and interface behaviour built with JavaScript.",
-    detail: "JavaScript",
+      "Responsive interfaces and useful interactions built with React, TypeScript and Tailwind CSS.",
+    tools: ["React", "TypeScript", "Tailwind CSS"],
+    visual: "frontend",
   },
   {
-    title: "Practical problem solving",
-    description: "Clear thinking across code, computers and technical support.",
-    detail: "Java + Python",
+    number: "02",
+    title: "Software foundations",
+    description:
+      "Small programs and problem-solving exercises using Java and Python, with attention to clear logic and maintainable structure.",
+    tools: ["Java", "Python", "Programming fundamentals"],
+    visual: "software",
+  },
+  {
+    number: "03",
+    title: "Technical support",
+    description:
+      "Diagnosing everyday computer, network and user issues with a methodical, practical approach.",
+    tools: ["Troubleshooting", "Testing", "User support"],
+    visual: "support",
   },
 ]
 

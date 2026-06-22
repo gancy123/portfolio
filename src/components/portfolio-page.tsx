@@ -4,17 +4,16 @@ import {
   Home,
   Mail,
   MonitorSmartphone,
-  MousePointerClick,
   Route,
   Wrench,
 } from "lucide-react"
 
 import { BuildPreview } from "@/components/build-preview"
+import { CapabilitiesWorkstation } from "@/components/capabilities-workstation"
 import { CommandMenu } from "@/components/command-menu"
 import { MiniLabSection } from "@/components/mini-lab"
 import { ProjectShowcase } from "@/components/project-showcase"
 import { Button } from "@/components/ui/button"
-import { CardSwap } from "@/components/ui/card-swap"
 import { ContainerScroll } from "@/components/ui/container-scroll-animation"
 import { RadialOrbitalTimeline } from "@/components/ui/radial-orbital-timeline"
 import { ToolMarquee } from "@/components/ui/tool-marquee"
@@ -22,13 +21,7 @@ import {
   TubelightNavbar,
   type TubelightNavItem,
 } from "@/components/ui/tubelight-navbar"
-import { capabilities, journey } from "@/content/portfolio"
-
-const capabilityIcons = [
-  <MonitorSmartphone key="responsive" />,
-  <MousePointerClick key="interactive" />,
-  <Wrench key="problem-solving" />,
-]
+import { journey } from "@/content/portfolio"
 
 const navigationItems: TubelightNavItem[] = [
   { name: "Home", url: "#top", icon: Home },
@@ -103,58 +96,25 @@ function CapabilitiesSection() {
   return (
     <section
       id="capabilities"
-      className="scroll-mt-24 border-y border-white/8 bg-[#18191b] py-20 md:py-24"
+      className="scroll-mt-24 border-y border-white/8 bg-[#18191b]"
     >
-      <div className="mx-auto grid max-w-5xl items-center gap-10 px-5 md:grid-cols-[.85fr_1.15fr] md:px-8">
-        <div>
-          <p className="font-mono text-xs tracking-[0.18em] text-[#ff7655] uppercase">
-            What I can do
-          </p>
-          <h2 className="mt-5 max-w-xl text-4xl leading-[1.02] font-semibold tracking-[-0.045em] md:text-5xl">
-            A practical toolkit, still growing.
+      <div className="mx-auto grid max-w-6xl gap-8 px-5 py-20 md:px-8 md:py-24 lg:grid-cols-[0.7fr_1.3fr] lg:gap-6 lg:py-28">
+        <div className="capabilities-intro lg:sticky lg:top-28 lg:self-start lg:pt-20">
+          <h2 className="max-w-xl text-4xl leading-[1.02] font-semibold tracking-[-0.05em] text-balance md:text-5xl lg:text-[2.75rem]">
+            <span className="lg:block lg:whitespace-nowrap">
+              Emerging web &amp;
+            </span>{" "}
+            <span className="lg:block lg:whitespace-nowrap">
+              software developer<span className="text-[#ff5a36]">.</span>
+            </span>
           </h2>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-white/52 md:text-lg">
-            I focus on clear websites, useful interaction and solving the
-            technical problems that appear along the way.
+          <p className="mt-7 max-w-lg text-base leading-relaxed text-white/58 md:text-lg">
+            I build responsive web interfaces, practise software development
+            with Java and Python, and solve practical computer problems through
+            patient troubleshooting.
           </p>
         </div>
-        <div className="relative flex min-h-[22rem] min-w-0 items-center justify-center overflow-visible pr-8 md:min-h-[26rem] md:pr-16">
-          <CardSwap
-            width="min(76vw, 430px)"
-            height={270}
-            cardDistance={26}
-            verticalDistance={22}
-            delay={2800}
-            pauseOnHover
-          >
-            {capabilities.map((capability, index) => (
-              <article
-                key={capability.title}
-                className="flex h-full flex-col p-6 md:p-8"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="flex size-11 items-center justify-center rounded-lg border border-[#ff7655]/20 bg-[#ff7655]/8 text-[#ff7655] [&_svg]:size-5">
-                    {capabilityIcons[index]}
-                  </span>
-                  <span className="font-mono text-xs text-white/28">
-                    0{index + 1}
-                  </span>
-                </div>
-                <div className="mt-auto">
-                  <h3 className="text-2xl font-medium tracking-[-0.035em] md:text-3xl">
-                    {capability.title}
-                  </h3>
-                  <p className="mt-3 max-w-sm text-sm leading-relaxed text-white/48 md:text-base">
-                    {capability.description}
-                  </p>
-                  <p className="mt-5 font-mono text-xs text-[#ff7655]">
-                    {capability.detail}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </CardSwap>
-        </div>
+        <CapabilitiesWorkstation />
       </div>
     </section>
   )
