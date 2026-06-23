@@ -3,10 +3,6 @@
 import * as React from "react"
 import { Braces, Code2, Headphones, Monitor, Wrench } from "lucide-react"
 
-import {
-  ScrollStack,
-  ScrollStackItem,
-} from "@/components/ui/scroll-stack"
 import { type Capability, capabilities } from "@/content/portfolio"
 
 const capabilityIcons = {
@@ -17,10 +13,33 @@ const capabilityIcons = {
 
 export function CapabilitiesWorkstation() {
   const [activeIndex, setActiveIndex] = React.useState(0)
+  const [isPaused, setIsPaused] = React.useState(false)
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+
+    if (mediaQuery.matches || isPaused) {
+      return
+    }
+
+    const timer = window.setInterval(() => {
+      setActiveIndex((currentIndex) => (currentIndex + 1) % capabilities.length)
+    }, 2800)
+
+    return () => window.clearInterval(timer)
+  }, [isPaused])
+
+  const activeCapability = capabilities[activeIndex]
 
   return (
-    <div className="capabilities-workstation">
-      <div className="capabilities-workstation-stage" aria-hidden="true">
+    <div
+      className="capabilities-workstation"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocus={() => setIsPaused(true)}
+      onBlur={() => setIsPaused(false)}
+    >
+      <div className="capabilities-workstation-stage">
         <img
           src="/build-lab-workstation.png"
           alt=""
@@ -29,6 +48,23 @@ export function CapabilitiesWorkstation() {
           className="capabilities-workstation-image"
           draggable={false}
         />
+        <div className="capabilities-screen" aria-live="polite">
+          <CapabilityScreen capability={activeCapability} />
+          <div className="capabilities-screen-tabs" aria-label="Select skill">
+            {capabilities.map((capability, index) => (
+              <button
+                key={capability.number}
+                type="button"
+                className="capabilities-screen-tab"
+                data-active={activeIndex === index || undefined}
+                onClick={() => setActiveIndex(index)}
+              >
+                <span>{capability.number}</span>
+                <span>{capability.title}</span>
+              </button>
+            ))}
+          </div>
+        </div>
         <ol className="capabilities-progress">
           {capabilities.map((capability, index) => (
             <li
@@ -43,36 +79,15 @@ export function CapabilitiesWorkstation() {
           ))}
         </ol>
       </div>
-
-      <ScrollStack
-        className="capabilities-scroll-stack"
-        itemDistance={64}
-        itemScale={0.02}
-        itemStackDistance={22}
-        stackPosition="16%"
-        scaleEndPosition="8%"
-        baseScale={0.92}
-        disableBelow={1024}
-        onActiveIndexChange={setActiveIndex}
-      >
-        {capabilities.map((capability) => (
-          <ScrollStackItem
-            key={capability.number}
-            className="capability-workstation-card"
-          >
-            <CapabilityCard capability={capability} />
-          </ScrollStackItem>
-        ))}
-      </ScrollStack>
     </div>
   )
 }
 
-function CapabilityCard({ capability }: { capability: Capability }) {
+function CapabilityScreen({ capability }: { capability: Capability }) {
   const Icon = capabilityIcons[capability.visual]
 
   return (
-    <article className="capability-workstation-panel">
+    <article key={capability.number} className="capability-workstation-panel">
       <div className="capability-workstation-copy">
         <div className="capability-workstation-meta">
           <span>{capability.number}</span>
